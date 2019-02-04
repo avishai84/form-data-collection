@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<style>
+    .myForm{float:left;
+  label{display:block;margin:0.35em 1em;font-size:16px;
+    input{padding:0.45em;}
+  }
+  input[type="submit"]{font-size:16px;margin: 0 1em;}
+}
+.results{
+  display:inline-block;
+  box-shadow:2px 3px 13px grey;
+  padding:0.5em;
+  color: rgba(0, 161, 218, 0.87);
+}
+</style>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
+    <title>Welcome to avishai84.com - a front-end web developer.</title>
+</head>
+
+<body>
+    <h1>Getting data from a form using FormData<h1>
+
+            <form class="myForm">
+                <label id="fullName">
+                    <input type="text" name="fullName" placeholder="full name" required />
+                </label>
+                <label id="emailAddress">
+                    <input type="email" name="emailAddress" placeholder="email" required />
+                </label>
+                <label id="password">
+                    <input type="password" name="password" placeholder="password" required />
+                </label>
+                <label id="image">
+                    <input type="file" name="image" placeholder="file" />
+                </label>
+                <input type="submit" name="submit" value="submit" />
+            </form>
+            <div class="results" style="display:none;"></div>
+</body>
+<script>
+    const results = document.querySelector('.results');
+    const form = document.querySelectorAll('.myForm');
+    const submit = form[0].submit;
+
+
+    function getForm(e) {
+        e.preventDefault();
+        const myForm = new FormData(form[0]);
+        let myItems = '';
+
+        myItems += myForm.get('fullName') + '<br>' +
+            myForm.get('emailAddress') + '<br>' +
+            myForm.get('password') + '<br>' +
+            myForm.get('image') + '<br>';
+
+        results.innerHTML = myItems;
+        results.style.display = 'inline-block';
+    }
+
+    document.addEventListener("DOMContentLoaded", function () {
+        submit.addEventListener('click', getForm, false);
+    }, false);
+</script>
+
+</html>
